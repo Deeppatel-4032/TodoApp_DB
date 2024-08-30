@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo-List</title>
+</head>
+
+<body>
+    <h1 style="text-align: center;">TODO LIST</h1>
+    <form method="post" action="/todoCon" align="center">
+        <label for="">todoList : </label>
+        <input type="text" name="todoList">
+        <button type="submit">Submit</button>
+    </form>
+
+    <h2 align="center">views-page</h2>
+    <table align="center" width="800px" border="1">
+        <thead>
+            <tr>
+                <th>#id</th>
+                <th>TodoList</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% todos.forEach((todoitem)=>{ %>
+                <tr>
+                    <td>
+                        <%= todoitem.id %>
+                    </td>
+                    <td>
+                        <%= todoitem.todoList%>
+                    </td>
+                    <td style="text-align: center;">
+                        <a href="editCon/<%= todoitem.id %>">edit</a>
+                        ||
+                        <a href="deleteCon/<%= todoitem.id %>">delete</a>
+                    </td>
+                </tr>
+            <% })%>
+        </tbody>
+    </table>
+</body>
+
+</html>

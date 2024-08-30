@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TodoList EditPage</title>
+</head>
+<body>
+    <h1 style="text-align: center;">EditPage</h1>
+    <form method="post" action="/updateCon/<%= editSingleRecod.id %>" align="center">
+        <label for="">todoList : </label>
+        <input type="text" name="id" value="<%= editSingleRecod.id%>" hidden>
+        <input type="text" name="todoList" value="<%= editSingleRecod.todoList%>">
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
