@@ -25,18 +25,18 @@
             </tr>
         </thead>
         <tbody>
-            <% todos.forEach((todoitem)=>{ %>
+            <% todos.forEach((todoitem, index)=>{ %>
                 <tr>
                     <td>
-                        <%= todoitem.id %>
+                        <%= index + 1 %>
                     </td>
                     <td>
-                        <%= todoitem.todoList%>
+                        <%= todoitem.title%>
                     </td>
                     <td style="text-align: center;">
-                        <a href="editCon/<%= todoitem.id %>">edit</a>
+                        <a href="editCon/<%= todoitem._id %>">edit</a>
                         ||
-                        <a href="deleteCon/<%= todoitem.id %>">delete</a>
+                        <a href="deleteCon/<%= todoitem._id %>">delete</a>
                     </td>
                 </tr>
             <% })%>

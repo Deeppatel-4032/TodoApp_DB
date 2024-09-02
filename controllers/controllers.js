@@ -1,12 +1,15 @@
 const todomodel = require("../models/todo_models.js")
-let storageTodo = [];
 
-const defaultCon = (req, res) => {
-    res.render("index.ejs", { todos : storageTodo });
+const defaultCon = async (req, res) => {
+
+    const data =  await todomodel.find({});
+
+    console.log("Data", data);
+    await res.render("index.ejs", { todos : data });
 }
 
 const todoCon = async (req, res) => {
-    console.log(req.body);
+    // console.log(req.body);
 
     const data = {
         title : req.body.todoList,
@@ -21,16 +24,20 @@ const todoCon = async (req, res) => {
     res.redirect("/");
 }
 
-const editCon = (req, res) => {
+const editCon = async (req, res) => {
 
-    const{id} = req.params;
+    const {id}= req.params; 
     console.log("editeID", id);
 
-    const editSingleRecod =  storageTodo.find((editId) => {
-        return editId.id == id;
-    })
-    res.render("edite_todo", { editSingleRecod });
-    console.log("editSingleRecod", editSingleRecod);
+    const editeData = await todomodel.findOne({ _id: id });
+
+    console.log("editeData", editeData);
+
+    // const editSingleRecod =  storageTodo.find((editId) => {
+    //     return editId.id == id;
+    // })
+    res.render("edite_todo", { editeData });
+    // console.log("editSingleRecod", editSingleRecod);
 }
 
 const updateCon = (req, res) => {

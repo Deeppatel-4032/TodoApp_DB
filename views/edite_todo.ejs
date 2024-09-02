@@ -7,10 +7,10 @@
 </head>
 <body>
     <h1 style="text-align: center;">EditPage</h1>
-    <form method="post" action="/updateCon/<%= editSingleRecod.id %>" align="center">
+    <form method="post" action="/updateCon/<%= editeData._id %>" align="center">
         <label for="">todoList : </label>
-        <input type="text" name="id" value="<%= editSingleRecod.id%>" hidden>
-        <input type="text" name="todoList" value="<%= editSingleRecod.todoList%>">
+        <input type="text" name="id" value="<%= editeData._id%>" hidden>
+        <input type="text" name="todoList" value="<%= editeData.title%>">
         <button type="submit">Submit</button>
     </form>
 </body>
