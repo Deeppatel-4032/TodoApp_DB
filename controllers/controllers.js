@@ -33,37 +33,28 @@ const editCon = async (req, res) => {
 
     console.log("editeData", editeData);
 
-    // const editSingleRecod =  storageTodo.find((editId) => {
-    //     return editId.id == id;
-    // })
     res.render("edite_todo", { editeData });
-    // console.log("editSingleRecod", editSingleRecod);
 }
 
-const updateCon = (req, res) => {
+const updateCon = async (req, res) => {
     
     const {id} = req.body;
-    console.log("updateID",id);
 
-    const updateTodo = storageTodo.find((upId) => {
-        return upId.id == id;
-    })
-    updateTodo.todoList = req.body.todoList;
-    console.log("updateTodo", updateTodo);
+    const updateData = await todomodel.findByIdAndUpdate({_id : id},  {title : req.body.title}, {new : true});
+
+    console.log("updateTodo", updateData);
         
     res.redirect("/");
 }
 
-const deleteCon = (req, res) => {
+const deleteCon = async (req, res) => {
 
     const {id} = req.body;
     console.log("DeleteID", id);
     
-    const deletItem = storageTodo.filter((delId) => {
-        return delId.id != id;
-    })
-    storageTodo = deletItem;
-    console.log("storageTodo", storageTodo);
+const deleteData = await todomodel.findByIdAndDelete(req.params.id);
+
+    console.log("deleteData", deleteData);
 
     res.redirect("/");
 }
