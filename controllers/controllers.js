@@ -1,4 +1,5 @@
-const todomodel = require("../models/todo_models.js")
+const todomodel = require("../models/todo_models.js");
+const fs = require("fs");
 
 const defaultCon = async (req, res) => {
 
@@ -9,12 +10,15 @@ const defaultCon = async (req, res) => {
 }
 
 const todoCon = async (req, res) => {
-    // console.log(req.body);
+    console.log(req.body, req.file);
 
     const data = {
         title : req.body.todoList,
-        compile : false,
+        path : req.file.path,
+        compile : false
     }
+    console.log("data", data);
+    
 
     const todoModelObj = new todomodel(data);
     await todoModelObj.save();
@@ -40,7 +44,24 @@ const updateCon = async (req, res) => {
     
     const {id} = req.body;
 
-    const updateData = await todomodel.findByIdAndUpdate({_id : id},  {title : req.body.title}, {new : true});
+  const update = await todomodel.findById(id)
+  console.log("update", update);
+
+  fs.unlink(update.path, (err) => {
+    if(!err)
+        console.log("delete file");   
+    });
+    update.title = req.body.title;
+
+   if(req.file) {
+        update.path = req.file.path
+   }
+   
+
+
+    const updateData = await todomodel.findByIdAndUpdate(
+        {_id : id}, update, {new : true}
+    );
 
     console.log("updateTodo", updateData);
         
@@ -49,7 +70,7 @@ const updateCon = async (req, res) => {
 
 const deleteCon = async (req, res) => {
 
-    const {id} = req.body;
+    const {id} = req.params;
     console.log("DeleteID", id);
     
 const deleteData = await todomodel.findByIdAndDelete(req.params.id);

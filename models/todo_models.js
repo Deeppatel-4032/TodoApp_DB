@@ -8,6 +8,9 @@ const todoSchema = mongoose.Schema({
     },
     compile : {
         type : Boolean
+    },
+    path : {
+        type : String
     }
 })
 

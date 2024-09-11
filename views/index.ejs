@@ -5,13 +5,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo-List</title>
+    <style>
+        .img-tag{
+            width: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .img-tag img {
+            width: 100%;
+          
+        }
+    </style>
 </head>
 
 <body>
     <h1 style="text-align: center;">TODO LIST</h1>
-    <form method="post" action="/todoCon" align="center">
+    <form method="post" action="/todoCon" align="center" enctype="multipart/form-data">
         <label for="">todoList : </label>
         <input type="text" name="todoList">
+        <input type="file" name="uploadFile">
         <button type="submit">Submit</button>
     </form>
 
@@ -21,6 +34,7 @@
             <tr>
                 <th>#id</th>
                 <th>TodoList</th>
+                <th>image</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -32,6 +46,11 @@
                     </td>
                     <td>
                         <%= todoitem.title%>
+                    </td>
+                    <td style="display: flex; justify-content: center; align-items: center;">
+                        <div class="img-tag">
+                            <img src="<%= todoitem.path %>" alt="<%= todoitem.title %>">
+                        </div>
                     </td>
                     <td style="text-align: center;">
                         <a href="editCon/<%= todoitem._id %>">edit</a>

@@ -15,7 +15,8 @@ app.set("views", Path);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use(express.static(Path));  
+app.use(express.static(Path)); 
+app.use("/public", express.static(path.join(__dirname,"/public")));
 app.use("/", routes);
 
 app.listen(PORT, (err)=> {
